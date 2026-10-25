@@ -2,29 +2,93 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 
-st.set_page_config(page_title='ROELSTAR | Finanzas de Taller', page_icon='⭐', layout='wide', initial_sidebar_state='collapsed')
-NAVY='#08245B'; RED='#C90000'; GREEN='#00B050'; YELLOW='#FFFF00'; GRAY='#D9D9D9'
+st.set_page_config(
+    page_title='ROELSTAR | Finanzas de Taller',
+    page_icon='⭐',
+    layout='wide',
+    initial_sidebar_state='collapsed'
+)
+
+NAVY = '#08245B'
+RED = '#C90000'
+GREEN = '#00B050'
+YELLOW = '#FFFF00'
+GRAY = '#D9D9D9'
+
 st.markdown(f'''<style>
-.block-container{{padding-top:1.5rem;max-width:1700px}}
-.rs-title{{font-size:1.8rem;font-weight:800;color:{NAVY}}}.rs-sub{{color:#596273;margin-bottom:1rem}}
-.rs-table{{width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed}}
-.rs-table th,.rs-table td{{border:1px solid #c7cbd1;padding:5px 3px;text-align:right;overflow-wrap:anywhere}}
-.rs-table th:first-child,.rs-table td:first-child{{text-align:left;width:38%}}
-.rs-table th{{background:{NAVY};color:white;font-weight:700}}
-.rs-table .income{{background:#E2F0D9}}.rs-table .total{{font-weight:800;background:#D9E2F3}}
-.rs-table .cost{{background:#FFF2CC}}.rs-table .utility{{background:{YELLOW}}}.rs-table .margin{{background:{GRAY}}}
-div[data-testid="stNumberInput"] input{{text-align:right}}
+.block-container{{
+    padding-top: 2rem;
+    max-width: 1700px;
+}}
+
+.rs-title{{
+    font-size: 1.8rem;
+    line-height: 1.4;
+    font-weight: 800;
+    color: {NAVY};
+    padding-top: 6px;
+    padding-bottom: 6px;
+    overflow: visible;
+    margin: 0;
+}}
+
+.rs-sub{{
+    color: #596273;
+    margin-bottom: 1rem;
+}}
+
+.rs-table{{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    table-layout: fixed;
+}}
+
+.rs-table th,
+.rs-table td{{
+    border: 1px solid #c7cbd1;
+    padding: 5px 3px;
+    text-align: right;
+    overflow-wrap: anywhere;
+}}
+
+.rs-table th:first-child,
+.rs-table td:first-child{{
+    text-align: left;
+    width: 38%;
+}}
+
+.rs-table th{{
+    background: {NAVY};
+    color: white;
+    font-weight: 700;
+}}
+
+.rs-table .income{{background: #E2F0D9;}}
+.rs-table .total{{font-weight: 800; background: #D9E2F3;}}
+.rs-table .cost{{background: #FFF2CC;}}
+.rs-table .utility{{background: {YELLOW};}}
+.rs-table .margin{{background: {GRAY};}}
+
+div[data-testid="stNumberInput"] input{{
+    text-align: right;
+}}
 </style>''', unsafe_allow_html=True)
+
 # Encabezado con el logo real de ROELSTAR.
 logo_path = Path(__file__).with_name('roelstar_logo.png')
-head_logo, head_title = st.columns([1, 6], vertical_alignment='center')
+
+head_logo, head_title = st.columns(
+    [1, 6],
+    vertical_alignment='center'
+)
 with head_logo:
     if logo_path.exists():
         st.image(str(logo_path), width=145)
     else:
         st.markdown('⭐ **ROELSTAR**')
 with head_title:
-    st.markdown('<div class="rs-title">FINANZAS DE TALLER</div><div class="rs-sub">Estado de resultados mensual · cifras expresadas en millones de pesos (COP)</div>', unsafe_allow_html=True)
+    st.markdown('<div class="rs-title">FINANZAS DE TALLER</div><div class="rs-sub">Estado de resultados mensual ·  si el relato indica $75.300.000, ingrese 75,3. (COP)</div>', unsafe_allow_html=True)
 
 # Entradas visibles en la página principal.
 st.markdown('### 🟩 Datos de entrada')
